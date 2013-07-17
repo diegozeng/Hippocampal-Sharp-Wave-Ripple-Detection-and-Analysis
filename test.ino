@@ -1,18 +1,18 @@
-#include "LowPassFilter.h"
-#include "LowPassFilter.c"
+#include "BandPassFilter.h"
+#include "BandPassFilter.c"
 
 //The number of samples to buffer before analyzing them
 int samplesN = 1000;
 int micPin = 0;
 
-LowPassFilter* filter;
+BandPassFilter* filter;
 
 void setup(){
   analogReadResolution(12);
   ADC->ADC_MR |= 0x800;
   Serial.begin(115200);
-  filter = new LowPassFilter();
-  LowPassFilter_init(filter);
+  filter = new BandPassFilter();
+  BandPassFilter_init(filter);
 }
 
 void loop(){
@@ -22,9 +22,9 @@ void loop(){
   long start = millis();
   for(int k=0; k<samplesN; k++){
     int val = analogRead(micPin);
-    LowPassFilter_put(filter, val);
+    BandPassFilter_put(filter, val);
 
-    int filtered = LowPassFilter_get(filter);
+    int filtered = BandPassFilter_get(filter);
 
     pow += ((long)val*(long)val)/samplesN;
     filtpow += ((long)filtered*(long)filtered)/samplesN;
