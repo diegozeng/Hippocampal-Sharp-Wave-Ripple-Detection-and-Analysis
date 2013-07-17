@@ -13,4 +13,4 @@ The window function applying in the project is Chebyshev windows using Parks-McC
 
 and h-file are from 'http://t-filter.appspot.com' temporarily.
 
-If there are any comments or suggestions, please sent me an E-mail to 'diegozengtao@gamil.com'
+If there are any comments or suggestions, please sent me an E-mail to 'diegozengtao@gmail.com'
