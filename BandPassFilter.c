@@ -1,6 +1,6 @@
-#include "LowPassFilter.h"
+#include "BandPassFilter.h"
 
-static int filter_taps[LOWPASSFILTER_TAP_NUM] = {
+static int filter_taps[BANDPASSFILTER_TAP_NUM] = {
   165039187,
   0,
   -379115666,
@@ -20,24 +20,24 @@ static int filter_taps[LOWPASSFILTER_TAP_NUM] = {
   165039187
 };
 
-void LowPassFilter_init(LowPassFilter* f) {
+void BandPassFilter_init(BandPassFilter* f) {
   int i;
-  for(i = 0; i < LOWPASSFILTER_TAP_NUM; ++i)
+  for(i = 0; i < BANDPASSFILTER_TAP_NUM; ++i)
     f->history[i] = 0;
   f->last_index = 0;
 }
 
-void LowPassFilter_put(LowPassFilter* f, int input) {
+void BandPassFilter_put(BandPassFilter* f, int input) {
   f->history[f->last_index++] = input;
-  if(f->last_index == LOWPASSFILTER_TAP_NUM)
+  if(f->last_index == BANDPASSFILTER_TAP_NUM)
     f->last_index = 0;
 }
 
 int LowPassFilter_get(LowPassFilter* f) {
   long long acc = 0;
   int index = f->last_index, i;
-  for(i = 0; i < LOWPASSFILTER_TAP_NUM; ++i) {
-    index = index != 0 ? index-1 : LOWPASSFILTER_TAP_NUM-1;
+  for(i = 0; i < BANDPASSFILTER_TAP_NUM; ++i) {
+    index = index != 0 ? index-1 : BANDPASSFILTER_TAP_NUM-1;
     acc += (long long)f->history[index] * filter_taps[i];
   };
   return acc >> 32;
