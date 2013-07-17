@@ -1,5 +1,5 @@
-#ifndef LOWPASSFILTER_H_
-#define LOWPASSFILTER_H_
+#ifndef BANDPASSFILTER_H_
+#define BANDPASSFILTER_H_
 
 /*
 
@@ -27,15 +27,15 @@ fixed point precision: 32 bits
 
 */
 
-#define LOWPASSFILTER_TAP_NUM 17
+#define BANDPASSFILTER_TAP_NUM 17
 
 typedef struct {
-  int history[LOWPASSFILTER_TAP_NUM];
+  int history[BANDPASSFILTER_TAP_NUM];
   unsigned int last_index;
-} LowPassFilter;
+} BandPassFilter;
 
-void LowPassFilter_init(LowPassFilter* f);
-void LowPassFilter_put(LowPassFilter* f, int input);
-int LowPassFilter_get(LowPassFilter* f);
+void BandPassFilter_init(BandPassFilter* f);
+void BandPassFilter_put(BandPassFilter* f, int input);
+int BandPassFilter_get(BandPassFilter* f);
 
 #endif
