@@ -1,9 +1,10 @@
-///////////////////////////////////
-Function
-
-
-
-//////////////////////////////////
+///////////////////////////////////////
+//Function:Getcoef.c                 //
+//Input: normalized main lobe        //
+//       normalized desired bandwith //
+//output: The coeffienct of h[n]     //
+//applying retangular window         //
+///////////////////////////////////////
 #include<math.h>
 #include <stdio.h>
 #include <string.h>
