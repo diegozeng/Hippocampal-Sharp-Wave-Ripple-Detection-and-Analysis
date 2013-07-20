@@ -61,14 +61,14 @@ int main(void)
 		///////////////////////////////////////  build rectangular window coefficient
 		printf("The window coefficient is\n");
 		for (j = 0;j < i;j++)
-       {
+                {
 		    X[j]=X[j]+j;
 				if (fabs(X[j]-N/2.0) < EPS)
 				  	X[j]=(d-c)/PI;
 				else
 				printf("%f",X[j]);
 				printf("\n");
-       }
+                }
                 //////////////////////////////////////
 		printf("again?(Type 0 to exit)");
 		scanf("%d",&a);
