@@ -69,7 +69,7 @@ int main(void)
 				printf("%f",X[j]);
 				printf("\n");
        }
-    //////////////////////////////////////
+                //////////////////////////////////////
 		printf("again?(Type 0 to exit)");
 		scanf("%d",&a);
 		getchar();
