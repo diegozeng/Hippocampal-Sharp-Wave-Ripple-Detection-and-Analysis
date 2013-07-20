@@ -67,6 +67,7 @@ int main(void)
 				if (fabs(X[j]-N/2.0) < EPS)
 				  	X[j]=(d-c)/PI;
 				else
+					X[j]=sin(d*(X[j]-N/2.0))/(PI*(X[j]-N/2.0))-sin(c*(X[j]-N/2.0))/(PI*(X[j]-N/2.0));
 				printf("%f",X[j]);
 				printf("\n");
                 }
