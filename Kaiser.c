@@ -23,7 +23,8 @@ static float bessel0(float x)
 	return(sum);
 }
 
-int main(void)
+ //int main(void)
+ int kaiser(int *Z)
 {
 	int a = 1;
 	while(a)
@@ -131,6 +132,9 @@ int main(void)
 		scanf("%d",&a);
 		getchar();
 	}
-	return 0;
+//	return 0;
+// Z transfer to int result
+//	result[i]
+	return N;
 }
 
