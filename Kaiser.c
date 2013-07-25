@@ -38,7 +38,7 @@ int main(void)
 	int *W = 0;
 	float *Z = 0;
 	float be,fs1,fp1,fp2,fs2,delta,alfa,N,M,fs;
-	int res2;
+	//int res2;
 	printf("pls input first sidelobe attenuation:\n");
 	scanf("%f",&alfa);
 	printf("pls input sampling frequency fs:\n");
