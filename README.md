@@ -22,15 +22,17 @@ Now the project has huge development: It is a flexible bandpass filter using fou
 
 Hanning, Hamming, and rectangular). The hardware is still  Arduino due (32-bit cortex-m3 ARM).
 
-The input now are: 1. The sidelobe attenuation 
+The input are: 
 
-                   2. fc1 and fc2 (For hanning, hamming and retangular)
+1. The sidelobe attenuation 
+
+2. fc1 and fc2 (For hanning, hamming and retangular)
                    
-                      fs1, fp1, fp2, fs2 (For kaiser)
+   fs1, fp1, fp2, fs2 (For kaiser)
                       
-                   3. Sampling frequency (Users need to do calibration of the hardware setting in 'Calibration.ino'
+3. Sampling frequency (Users need to do calibration of the hardware setting in 'Calibration.ino'
                    
-                   4. The input signal will convey into the Arduino due board through the analongInput(A0)
+4. The input signal will convey into the Arduino due board through the analongInput(A0)
                    
 The output will be exported by digitalOutput DAC0/DAC1, and the final results will be represented in the Oscilloscope. 
 
