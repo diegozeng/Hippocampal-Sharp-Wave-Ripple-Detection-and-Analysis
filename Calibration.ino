@@ -9,7 +9,7 @@ BandPassFilter* filter;
 
 void setup(){
   analogReadResolution(12);
-  ADC->ADC_MR |= 0x800;
+  ADC->ADC_MR = 0x103D0200; // Do calibration here to realize the required sampling frequency
   Serial.begin(115200);
   filter = new BandPassFilter();
   BandPassFilter_init(filter);
