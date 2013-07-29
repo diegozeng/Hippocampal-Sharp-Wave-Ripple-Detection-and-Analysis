@@ -1,11 +1,3 @@
-///////////////////////////////////////
-//Function:Getcoef.c                 //
-//Input: normalized main lobe        //
-//       normalized desired bandwith //
-//output: The coeffienct of h[n]     //
-//applying retangular window         //
-///////////////////////////////////////
-
 #include<math.h>
 #include <stdio.h>
 #include <string.h>
@@ -20,15 +12,15 @@ int main(void)
 	{
 		int i,j;
 		float N,BW;
-		float b;
-		float c,d;
+		float fs;
+		float fc1,fc2;
 		int *W = 0;
 		float *X = 0;
 		float EPS = 0.00001;
-		int res,res1;
-		//int k = 0;
-		//label1:
-		printf("Please type the normalized main lobe (0 to 1) width of the filter\n");
+		int res;
+		printf("pls input sampling frequency fs:\n");
+		scanf("%f",&fs);
+		printf("Pls input the main lobe width of the filter\n");
 		//scanf("%f",&BW);
 		res = scanf("%f",&BW);
 		getchar();
@@ -39,7 +31,14 @@ int main(void)
 				res = scanf("%f",&BW);
 				getchar();
 			}
-		printf("Please type the normalized band-width (0 to 1) of the filter\n");
+		BW=2*BW/fs;
+		printf("pls input fc1:\n");
+		scanf("%f",&fc1);
+		fc1=fc1/fs;
+		printf("pls input fc2:\n");
+		scanf("%f",&fc2);
+		fc2=fc2/fs;
+		/*printf("Please type the normalized band-width (0 to 1) of the filter\n");
 		res1 = scanf("%f",&b);
 		getchar();
 		while(!res1)
@@ -48,10 +47,10 @@ int main(void)
 				printf("Please type the normalized band-width (0 to 1) of the filter\n");
 				res1 = scanf("%f",&b);
 				getchar();
-			}
+			}*/
 		//printf("%f",b);
-		c = PI*(1.0 - b) / 2;
-		d = PI-c;
+		//c = PI*(1.0 - b) / 2;
+		//d = PI-c;
 		//printf("%f\n",c);
 		//printf("%f\n",d);
 		N = 4 / BW - 1;
@@ -72,18 +71,18 @@ int main(void)
 				X[j] = X[j]+j;
 				//printf("\n");
 				if (fabs(X[j]-N/2.0) < EPS)
-					X[j] = (d-c)/PI;
+					X[j] = 2*(fc2-fc1);
 				else
-					X[j] = sin(d*(X[j]-N/2.0))/(PI*(X[j]-N/2.0))-sin(c*(X[j]-N/2.0))/(PI*(X[j]-N/2.0));
-				X[j]= X[j]*pow(2,32);
-				W[j]= (int)(X[j]+0.5);
-				printf("%d",W[j]); 
-				printf("\n");
-				//printf("%f",X[j]);
+					X[j] = sin(PI*2*fc2*(X[j]-N/2.0))/(PI*(X[j]-N/2.0))-sin(PI*2*fc1*(X[j]-N/2.0))/(PI*(X[j]-N/2.0));
+				//X[j]= X[j]*pow(2,32);
+				//W[j]= (int)(X[j]+0.5);
+				//printf("%d",W[j]); 
 				//printf("\n");
+				printf("%f",X[j]);
+				printf("\n");
               }
 		///////////////////////////////////////
-		//printf("The length is %d\n",i);
+		printf("The length is %d\n",i);
 		printf("again?(Type 0 to exit)");
 		scanf("%d",&a);
 		getchar();
