@@ -3,31 +3,28 @@
 
 /*
 
-FIR filter designed with
- http://t-filter.appspot.com
-
 sampling frequency: 5000 Hz
 
 fixed point precision: 32 bits
 
-* 0 Hz - 800 Hz
+* 0 Hz - 125 Hz
   gain = 0
-  desired attenuation = -40 dB
+  desired attenuation = -60 dB
   actual attenuation = n/a
 
-* 1000 Hz - 1500 Hz
+* 175 Hz - 225 Hz
   gain = 1
   desired ripple = 5 dB
   actual ripple = n/a
 
-* 1700 Hz - 2500 Hz
+* 275 Hz - 2500 Hz
   gain = 0
-  desired attenuation = -40 dB
+ desired attenuation = -60 dB
   actual attenuation = n/a
 
 */
 
-#define BANDPASSFILTER_TAP_NUM 17
+#define BANDPASSFILTER_TAP_NUM 364
 
 typedef struct {
   int history[BANDPASSFILTER_TAP_NUM];
