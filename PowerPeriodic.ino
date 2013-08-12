@@ -5,7 +5,7 @@
 int samplesN = 50;
 int micPin = 0;
 int j = 0;
-int buf[1180] = {0};
+int buf[1180] = {0};// array length: determined by the sample length in a cycle.
 BandPassFilter* filter;
 
 void setup()
@@ -38,10 +38,11 @@ void loop()
   buf[j] = filtpow;
   analogWrite(DAC1,filtpow); 
   j=j+1;
-  if(j==1179)
+  if(j==1179) // determined by the sample length in a cycle
   {
     j=0;
   }
+  
   //float freq = ((float)samplesN * (float)1000) / ((float)end - (float)start);
   // Serial.println(freq);
 
