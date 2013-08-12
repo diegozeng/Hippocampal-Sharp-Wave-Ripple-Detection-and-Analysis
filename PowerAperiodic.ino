@@ -5,7 +5,7 @@
 int samplesN = 50;
 int micPin = 0;
 int j = 0;
-int buf[23000] = {0};// The largest value acceptable.(For aperodic test signal sequences)
+int buf[20000] = {0};// The largest value acceptable.(For aperodic test signal sequences)
 BandPassFilter* filter;
 
 void setup()
