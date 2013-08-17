@@ -26,7 +26,8 @@ void loop()
   for(int k=0; k<samplesN; k++)
     {
     int val = analogRead(micPin);
-    //var=(int)((val*3.3-2252.8)/2.2-1177);
+    val = map(val,681,3413,0,4095); //Solve DAC output limitation.(1/6~5/6 Vref)
+    val = int(val);
     BandPassFilter_put(filter, val);
     int filtered = BandPassFilter_get(filter);
     filtpow += ((long)filtered*(long)filtered)/samplesN;
