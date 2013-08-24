@@ -1,0 +1,5 @@
+"Calibration.ino" : Calibrate the sampling frequency
+"DACTEST.ino": The sample model to store test signal data
+"FilteredResult.ino": To show the filtered result directly.
+"PowerAperiodic.ino": To show the power result and produce a pulse when a ripple is detected.(Aperidic sweep)
+"PowerPeriodic.ino": To show the power result and produce a pulse when a ripple is detected.(Peridic sweep)
