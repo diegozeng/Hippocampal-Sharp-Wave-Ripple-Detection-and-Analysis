@@ -1,0 +1,6 @@
+The head file and source code is the core of the bandpass filter algorithm.
+For "BandPassFilter.h" the only flexible part is "#define BANDPASSFILTER_TAP_NUM", the number after it should be 
+referred to the window length calculated by computer.
+For "BandPassFilter.h" the only flexible part is "static int filter_taps", the coefficient inside should be 
+referred to the window coefficients calculated by computer as well.
+These two files are concluded in the main funtion of Arduino IDE project, so all the algorthm will be compiled by Arduino IDE
