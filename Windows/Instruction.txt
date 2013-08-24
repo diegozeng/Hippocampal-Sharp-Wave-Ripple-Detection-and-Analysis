@@ -1,0 +1,7 @@
+There are totally 4 kinds of windows avaliable in this project.
+Each source code will output the window coefficients of certain type corresponding to user's inputs.
+Normally, use Kaiser window (KAIS.c). It has best performance for any kinds of input.
+A file named "data.txt" will be created automatically, There are the design results (window length and window coeffcients)
+inside. 
+Copy the window coefficients to the "BandPassFilter.c" (repalce the static array) and window length to the "BandPassFilter.h"
+(replace the window length).
