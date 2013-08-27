@@ -51,6 +51,38 @@ void loop()
 
 void interr()
 {
-  for (int i = 0; i < j; i++)
+  //delay(10);
+  float k=0;
+  float x=0;
+  float y;
+  Serial.println("The power sequence is:");
+  for (int i = 10; i < j; i++)
+  {
   Serial.println(buf[i]);
+  k+=buf[i];
+  }
+  k=k/(j-10);
+  //Serial.print("The Mean value is ");
+  //Serial.println(k);
+  for (int i = 10; i < j; i++)
+  {
+    x+= (buf[i]-k)*(buf[i]-k);
+  }
+  x=sqrt(x/(j-10));
+  //Serial.print("The SD value is ");
+  //Serial.println(x);
+  y=k+6*x;
+  //Serial.print("The Therhold value is ");
+  //Serial.print(y);
+  Serial.println("The pulse sequence is:");
+  for (int i = 10; i < j; i++)
+  {
+    if(buf[i]<y)
+      buf[i]=0;
+    else
+      buf[i]=150;
+    Serial.println(buf[i]);
+  }
+  Serial.println("The therhold value is:");
+  Serial.print(y);
 }

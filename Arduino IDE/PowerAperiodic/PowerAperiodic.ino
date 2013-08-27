@@ -68,7 +68,7 @@ void interr()
   x=sqrt(x/(j-10));
   //Serial.print("The SD value is ");
   //Serial.println(x);
-  y=k+5*x;
+  y=k+6*x;
   //Serial.print("The Therhold value is ");
   //Serial.print(y);
   Serial.println("The pulse sequence is:");
