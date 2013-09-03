@@ -8,6 +8,11 @@
 int main(void)
 {	
 	int a=1;
+	FILE * fp = fopen("data.txt", "w");
+	if(fp == NULL)
+	{	
+		printf("open file wrong!\n");
+	}
 	while(a)
 	{
 		int i,j;
@@ -86,6 +91,7 @@ int main(void)
 		printf("again?(Type 0 to exit)");
 		scanf("%d",&a);
 		getchar();
-	};                            
+	};    
+	fclose(fp);
 	return 0;
 }
