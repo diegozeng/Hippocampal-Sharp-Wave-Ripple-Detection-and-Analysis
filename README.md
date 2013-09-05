@@ -41,3 +41,15 @@ For the convolution algrithom, there is a reference from 'http://t-filter.appspo
 work.
 
 If there are any comments or suggestions, please sent me an E-mail to 'diegozengtao@gmail.com'
+
+===============Update on September 5th===============
+
+User Manual 1.0 Uploaded.
+
+This is my first time to write user manual in LaTex.
+
+Please complie it with “PdfTex”
+
+Forgive me about the Tex code form. I will improve my programming skills in the future by practising.
+
+If there are any comments or suggestions, please sent me an E-mail to 'diegozengtao@gmail.com'
