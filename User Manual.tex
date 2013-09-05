@@ -1,0 +1,344 @@
+\documentclass[12pt]{report}
+\usepackage{graphicx}
+\usepackage{titlesec}
+\usepackage[margin=3cm]{geometry}
+\titleformat{\chapter}[display]{\Huge\bfseries}{Chapter \thechapter}{0.3em}{}
+\titlespacing*{\chapter} {0pt}{10pt}{5pt}
+\titlespacing*{\section} {0pt}{2.5ex plus 1ex minus .2ex}{1ex plus .2ex}
+\titlespacing*{\subsection} {0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+\titlespacing*{\subsubsection}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+\titlespacing*{\paragraph} {0pt}{3.25ex plus 1ex minus .2ex}{1em}
+\titlespacing*{\subparagraph} {\parindent}{3.25ex plus 1ex minus .2ex}{1em}
+ \title{User Manual (v2.0)}
+ \author{Tao Zeng\vspace{10pt}\\Csicsvari Group\\Institute of Science and Technology Austria\\Am Campus 1\\Klosterneuburg 3400\vspace{10pt}\\2013.09.04\\\vspace{20pt}\\\includegraphics[width=0.5\textwidth]{11.jpg}}
+\begin{document}
+\date{}
+\maketitle
+%\begin{figure}
+  %\centering
+  % Requires \usepackage{graphicx}
+  %\includegraphics[width=0.8\textwidth]{11.jpg}\\
+%\end{figure}
+%\moveleft.5\hoffset\centerline{Csicsvari Group}
+%\moveleft.5\hoffset\centerline{Institute of Science and Technology Austria}
+%\moveleft.5\hoffset\centerline{Am Campus 1}
+%\moveleft.5\hoffset\centerline{Klosterneuburg 3400}%This is comment
+\vspace{10pt}
+%\vfill
+\newpage
+\thispagestyle{empty}
+\tableofcontents
+\chapter{\Large Introduction}
+\textup{This user manual includes two systems based on Arduino due. They are kinds of embedded systems, so basically they need both hardware and software support. The open source characteristic for both hardware and software of Arduino satisfied all of the requirements and specifications. And the powerful functions of the 32-bit microprocessor "Arduino Due" is chosen as the core of these two systems.}
+\begin{center}
+\includegraphics[width=0.7\textwidth]{12.jpg}\\
+\textup{\footnotesize Fig 1. Arduino Due Front View}
+\end{center}
+\section{\large Introduction to Arduino Due}
+The Arduino Due is a microcontroller board based on the Atmel SAM3X8E ARM Cortex-M3 CPU (datasheet). It is the first Arduino board based on a 32-bit ARM core microcontroller. It has 54 digital input/output pins (of which 12 can be used as PWM outputs), 12 analog inputs, 4 UARTs (hardware serial ports), a 84 MHz clock, an USB OTG capable connection, 2 DAC (digital to analog), 2 TWI, a power jack, an SPI header, a JTAG header, a reset button and an erase button.\\The board contains everything needed to support the microcontroller; simply connect it to a computer with a micro-USB cable or power it with a AC-to-DC adapter or battery to get started. The Due is compatible with all Arduino shields that work at 3.3V and are compliant with the 1.0 Arduino pinout.
+\begin{flushleft}
+\textbf{Programming}\\
+\end{flushleft}
+\textup{The Arduino Due can be programmed with the Arduino software (IDE)\\
+Uploading sketches to the SAM3X is different than the AVR microcontrollers found in other Arduino boards because the flash memory needs to be erased before being re-programmed. Upload to the chip is managed by ROM on the SAM3X, which is run only when the chip's flash memory is empty.\\}
+\textup{\vspace{2pt}\\Either of the USB ports can be used for programming the board, though it is recommended to use the Programming port due to the way the erasing of the chip is handled:}
+\begin{center}
+\includegraphics[width=0.7\textwidth]{13.jpg}\\
+\textup{\footnotesize Fig 1.1.1}
+\end{center}
+\textbf{Programming port:}
+\textup{To use this port, select ``Arduino Due (Programming Port)'' as your board in the Arduino IDE. Connect the Due's programming port (the one closest to the DC power jack) to your computer. The programming port uses the 16U2 as a USB-to-serial chip connected to the first UART of the SAM3X (RX0 and TX0). The 16U2 has two pins connected to the Reset and Erase pins of the SAM3X. Opening and closing the Programming port connected at 1200bps triggers a “hard erase” procedure of the SAM3X chip, activating the Erase and Reset pins on the SAM3X before communicating with the UART. This is the recommended port for programming the Due. It is more reliable than the "soft erase" that occurs on the Native port, and it should work even if the main MCU has crashed.\\}
+\begin{flushleft}
+\textbf{Native port:}
+\textup{To use this port, select ``Arduino Due (Native USB Port)'' as your board in the Arduino IDE. The Native USB port is connected directly to the SAM3X. Connect the Due's Native USB port (the one closest to the reset button) to your computer. Opening and closing the Native port at 1200bps triggers a 'soft erase' procedure: the flash memory is erased and the board is restarted with the bootloader. If the MCU crashed for some reason it is likely that the soft erase procedure won't work as this procedure happens entirely in software on the SAM3X. Opening and closing the native port at a different baudrate will not reset the SAM3X.}
+\end{flushleft}
+\section{\large Setup Arduino IDE}
+\textbf{Windows System:\\}
+\textup{(1) Go to }
+\textsl{http://arduino.cc/en/Main/Software}
+\textup{to download suitable version (Now the latest version for Arduino due is 1.5.3)\\}
+\textup{(2) Connect the Due to your computer with a USB cable via the Programming port.\\}
+\textup{(3) Windows should initiate its driver installation process once the board is plugged in, but it won't be able to find the driver on its own. You'll have to tell it where the driver is.\\}
+\textup{(4) Click on the Start Menu and open the Control Panel.\\}
+\textup{(5) Navigate to ``System and Securit''. Click on System, and open the Device Manager.\\}
+\textup{(6) Look for the listing named (COM \& LPT)”. You should see an open port named ``Arduino Due Prog. Port''.\\}
+\textup{(7) Select the “Browse my computer for Driver software” option.}
+\begin{center}
+\includegraphics[width=0.8\textwidth]{14.jpg}\\
+\textup{\footnotesize Fig 1.2.1}
+\end{center}
+\textup{(8) Right click on the ``Arduino Due Prog. Port'' and choose ``Update Driver Software''. Descriptive text.}
+\begin{center}
+\includegraphics[width=0.8\textwidth]{15.jpg}\\
+\textup{\footnotesize Fig 1.2.2}
+\end{center}
+\textup{(9) Navigate to the folder with the Arduino IDE you downloaded and unzipped earlier. Locate and select the ``Drivers'' folder in the main Arduino folder (not the ``FTDI USB Drivers'' sub-directory). Press ``OK'' and ``Nex'' to proceed.\\(10) If you are prompted with a warning dialog about not passing Windows Logo testing, click ``Continue Anyway''.\\(11) Windows now will take over the driver installation.}
+\begin{center}
+\includegraphics[width=0.8\textwidth]{16.jpg}\\
+\textup{\footnotesize Fig 1.2.3}
+\end{center}
+\textup{(12) You have installed the driver on your computer. In the Device Manager, you should now see a port listing similar to ``Arduino Due Programming Port (COM4)''.}
+\begin{center}
+\includegraphics[width=0.8\textwidth]{17.jpg}\\
+\textup{\footnotesize Fig 1.2.4}
+\end{center}
+\newpage
+\begin{flushleft}
+\textbf{Linux System (Fedora 17)}
+\end{flushleft}
+\textup{Before starting, please ensure you installed all the latest updates with: \\}
+\textbf{\$ sudo yum update\\}
+\textup{Arduino packages are now available directly from Fedora repos, and the install is as minimal as:\\}
+\textbf{\$ sudo yum install arduino\\}
+\textup{If you run the Arduino IDE as a normal user (you should do that of course), you may get this error message :}
+\textbf{check\_group\_uucp()}
+\textup{: error testing lock file creation Error details:}
+\textbf{Permission denied\\}
+\textup{This is probably because you don't have write permissions on /run/lock directory. Try this to see if this solves your problem :}
+\textbf{sudo chmod 777 /run/lock/run/lock }
+\textup{is created on boot by /usr/lib/tmpfiles.d/legacy.conf (both on systemd and initscripts). So if you want to keep the permissions you set, simply copy the file:\\}
+\textbf{/usr/lib/tmpfiles.d/legacy.conf to /etc/tmpfiles.d/}\\
+\textup{and edit it there (set 0777 permissions).}
+\section{\large How to Use Arduino due IDE}
+\begin{center}
+\includegraphics[width=0.6\textwidth]{18.jpg}\\
+\textup{\footnotesize Fig 1.3.1}
+\end{center}
+\newpage
+\begin{flushleft}
+\textup{Verify: Similar to ``complie'', to verify if it is any bugs in your program.\\Upload: Upload=Verify+Upload your program to Arduino. Don't disconnect the USB wire when it is uploading.\\New: Creat a new file, format:```date+sequence'.ino''.\\Open: Open an ``.ino'' file.\\Save: Save current files.\\}
+\end{flushleft}
+\vspace{10pt}
+\begin{center}
+\includegraphics[width=0.6\textwidth]{19.jpg}\\
+\textup{\footnotesize Fig 1.3.2}
+\end{center}
+\textup{When you open Arduino IDE, you should make sure that which board you are using now. These two systems both use }
+\textbf{Arduino Due }
+\textup{and they are supposed to use }
+\textbf{programming port }
+\textup{to upload programs.}
+\begin{center}
+\includegraphics[width=0.5\textwidth]{20.jpg}\\
+\textup{\footnotesize Fig 1.3.3}
+\end{center}
+\textup{Choose the correct serial port you are connecting to.}
+\begin{center}
+\includegraphics[width=0.5\textwidth]{21.jpg}\\
+\textup{\footnotesize Fig 1.3.4}
+\end{center}
+\textup{Because we use mini USB wire to upload programs, so we use USBasp as the programmer.}
+\chapter{\Large Flexible Sharp Wave Ripple Detector}
+\textup{The basic idea of this system is to build a band pass filter, keep the signal with the certain frequency interval and cancel the signal with frequency out of the interval.\\This system use window functions to design the band pass filter and after getting the output, user can choose a window with flexible length to calculate the signal power inside this window. Then detect the SWR through a threshold value.}
+\section{\large Introduction to Band Pass Filter}
+\textup{FIR Band Pass Filter is applied in this system. It has a linear phase, which means the time delay is linearly related with the frequency component of signals and this property make the output signal without distortion.}
+\subsection{Window functions}
+\textup{There are totally four kinds of window functions provided:\\}
+\textbf{(a) Rectangular window:}
+\textup{Small main lobe, low side lobe attenuation, large power leakage.(Not suitable for SWR detection, just for testing)\\ }
+\textbf{(b) Hanning window:}
+\textup{Larger main lobe, high and fast side lobe attenuation, small power leakage.\\ }
+\textbf{(c) Hamming window:}
+\textup{Improvement of Hanning window, smallest power leakage.(Better performance if signal passband is fixed)\\}
+\textbf{(d) Kaiser window:}
+\textup{Most complicated one, but it is also the most accurate, flexible  one. It can adjust the main lobe width and side lobe attenuation at the same time. (Recommended)\\}
+The detail source code are named \textbf{"Rectangular.c", "Hanning.c", "Hamming.c"} and \textbf{"Kaiser.c".}
+\subsection{Input and Output}
+\begin{center}
+\includegraphics[width=0.5\textwidth]{22.jpg}\\
+\textup{\footnotesize Fig 2.1.2.1 Kaiser window design model}
+\end{center}
+\begin{center}
+\includegraphics[width=0.5\textwidth]{23.jpg}\\
+\textup{\footnotesize Fig 2.1.2.2 Retangular, Hanning, Hamming window design model}
+\end{center}
+  \begin{center}
+    \begin{tabular}{||c|c|c||} \hline
+      \ -- & Input Parameters & Output Parameters\\ \hline
+      \textbf{Rectangular} & Fs Fc1 Fc2 Main lobe width & Filter length \& Filter coefficients\\ \hline
+      \textbf{Hanning} & Fs Fc1 Fc2 Main lobe width & Filter length \& Filter coefficients\\ \hline
+      \textbf{Hamming} & Fs Fc1 Fc2 Main lobe width & Filter length \& Filter coefficients\\ \hline
+      \textbf{Kaiser} & Side lobe attenuation Fs fs1 fp1 fp2 fs2 & Filter length \& Filter coefficients\\ \hline
+    \end{tabular}
+  \end{center}
+  \moveleft.5\hoffset\centerline{\footnotesize Table 2.1.2.1}
+\vspace{3pt}
+A file named \textbf{``data.txt''} will be created automatically, There are the design results (window length and window coefficients) inside.\\Copy the window coefficients to the \textbf{``BandPassFilter.c''} (replace the static array) and window length to the \textbf{``BandPassFilter.h''} (replace the window length).
+\subsection{Core Algorithm}
+\textup{Convolution is the core algorithm of the digital band pass filter. "BandPassFilter.c" and "BandPassFilter.h" are the source code and head file to realize this algorithm.\\For "BandPassFilter.h" the only flexible part is:}
+ \begin{flushleft}
+\textbf{``\#define BANDPASSFILTER\_TAP\_NUM''}\\
+ \end{flushleft}
+\textup{The number after it should be referred to the window length calculated by computer.
+For "BandPassFilter.h" the only flexible part is:}
+ \begin{flushleft}
+\textbf{``static int filter\_taps''}\\
+ \end{flushleft}
+\textup{The coefficient inside should be referred to the window coefficients calculated by computer as well.\\These two files are concluded in the main funtion of Arduino IDE project, so all the algorthm will be compiled by Arduino IDE.}
+\newpage
+\subsection{Main Function}
+\textup{Main functions are the programs running on Arduino IDE with the filename format ``XXX.ino''.}
+\begin{center}
+    \begin{tabular}{||c|c||} \hline
+      \ -- & \textbf{Description}\\ & \\ \hline
+      \ \textbf{Calibration.ino} & To adjust the ADC sampling rate to \\ & Certain sampling frequency(0-7000Hz).\\ \hline
+      \ \textbf{DACTEST.ino} & To store the test signal sequence and \\ & output the analog signal to Second board.\\ \hline
+      \ \textbf{FilteredResult.ino} & To get the filtered result directly \\ & from the DAC (with both P/N value).\\ \hline
+      \ \textbf{FourChannels.ino} & To get the power when there are \\ & four channels analog input (Aperopdic).\\ \hline
+      \ \textbf{PowerAperiodic.ino} & To get the power through a window \\ & with specific length, detecting it by pulse.\\ \hline
+      \ \textbf{PowePeriodic.ino} & If the length of signal is known, use this \\ & program to replace the signal (save space).\\ \hline
+    \end{tabular}
+  \end{center}
+  \moveleft.5\hoffset\centerline{\footnotesize Table 2.1.2.1}
+\section{Circuit Schematic}
+\vspace{5pt}
+\begin{center}
+\includegraphics[width=0.9\textwidth]{1.png}\\
+\textup{\footnotesize Fig 2.2.1\\}
+\end{center}
+\textbf{Warning:} Unlike other Arduino boards, the Arduino Due board runs at 3.3V. The maximum voltage that the I/O pins can tolerate is 3.3V. Providing higher voltages, like 5V to an I/O pin could damage the board.\\For the test signal, we need to do some modification to make it in the range 0~3.3V:\vspace{3pt}
+\textbf{For data sequence from axona(off-line):}
+Try to use map(value, min, max, 0, 4095) to make the scale fit to the requirement (12-bit ADC has the resolution 4096)\\ 
+\textbf{For the real signal(on-line):}
+\textup{It can be connect to the analog input of Board II directly. But some signal conditioning circuits should be made to transfer the voltage level of real signal to 0~3.3V as mentioned.}
+\vspace{5pt}
+\section{Setting Procedure}
+1. Connect the circuit.\\
+2. Choose a window, use a C compiler to run the program. Type the input parameters, get the window length and window coefficients.\\
+3. After getting the window length and window coefficients. Copy it to \textbf{``BandPassFilter.c''} and \textbf{``BandPassFilter.h''} and save the files.\\
+4. Open Arduino IDE.\\
+5. Open \textbf{``DACTEST.ino''} copy the data sequence to the static array, then Upload to Board I. (For real signal, it is not necessary, just skip this step.)\\
+6. Open \textbf``Calibration.ino'', adjust the value of \textbf{``ADC\_MR''} until it close to the user required sampling frequency.(5000Hz is recommanded)\\
+7. Open \textbf{``PowerAperiodic.ino''}(for signal with unknown length) or \textbf{``Powerperiodic.ino''}(for signal with known length), upload it to Arduino Due.\\
+8. After uploading, you can use the oscilloscope to detect if the system works well
+(CH1 shows the original test signal CH1 shows the filtered result).\\
+9. Open the Serial Monitor.\\
+10. If it is working. Press \textbf{RESET button} on Board II as the starting point of signal recording and Press the \textbf{button on the bread board} as the ending point of signal recording.\\
+11. The results are showed in serial monitor, users can copy the data for further analysis.\\
+\newpage
+\section{Trouble Shooting}
+\subsection{Resource Used in The System}
+\begin{center}
+    \begin{tabular}{||c|c||} \hline
+      \ & Two Arduino boards\\ & Board I (3.3V, GND, DAC1)\\ \textbf{Hardware} & Board II (GND, A0, PWM3, DAC0)\\ & 1 push button\\ &
+      1 10kilo-ohm resistor\\ & Wires\\ \hline
+      \ & Arduino IDE\\ & Rectangular.c\\ & Hanning.c\\ & Hamming.c\\ & Kaiser.c\\ & BandPassFilter.h\\ \textbf{Software} & BandPassFilter.c\\ & Calibration.ino\\ & DACTEST.ino\\ & FilteredResult.ino\\ & Fourchannels.ino\\ & PowerAperiodic.ino\\ & PowerPeriodic.ino\\ \hline
+    \end{tabular}
+  \end{center}
+  \moveleft.5\hoffset\centerline{\footnotesize Table 2.4.1.1}
+\subsection{Common Q \& A}
+\textbf{Q1: }
+\textup{I cannot upload the program with the error ``No device found on COMX(ACMttyX)'',  what can I do?\\}
+\textbf{Answer:\\}
+\textup{a. Press ``Erase'' for severals seconds, hold on.\\b. Then press ``Reset''\\c. Release ``Erase''\\d. Release ``Reset'' finally.}
+\begin{flushleft}
+\textbf{Q2: }
+\textup{I want to write some libraries and include them in my ".ino" files, what can I do?\\}
+\textbf{Answer:}
+\textup{Put them in arduino-1.5.2-windows\textbackslash arduino-1.5.2\textbackslash libraries, Arduino IDE will search this directory when it is uploading program. }
+\end{flushleft}
+\begin{flushleft}
+\textbf{Q3: }
+\textup{I uploaded the program successfully, but it doesn't work, what's the reason?\\}
+\textbf{Answer:}
+\textup{Notice what serial port you are connected before you upload program.(right down side of Arduino IDE)}
+\end{flushleft}
+\newpage
+\chapter{\Large Simple Function Generator}
+\textup{With push buttons, you will be able to choose a waveform shape (sine, triangular, sawtooth, or square) on both DAC channels (DAC0 and DAC1) and change the frequency and amplitude of the generated signal.}
+\section{\large Function \& Specifications}
+\textbf{Function:}
+  \begin{center}
+    \begin{tabular}{||c|c|c|c|c||} \hline
+      \  & \textbf{Mode 1} & \textbf{Mode 2} & \textbf{Mode 3} & \textbf{Mode 4}\\ \hline
+      \textbf{DAC0} & Sine & Triangular & Sawtooth & Square\\ \hline
+      \textbf{DAC1} & Sine & Triangular & Sawtooth & Square\\ \hline
+    \end{tabular}
+  \end{center}
+  \begin{center}
+  \textup{\footnotesize Table 3.1.1}
+  \end{center}
+\textbf{Specification:}
+\begin{center}
+    \begin{tabular}{||c|c|c|c||} \hline
+      \  & \textbf{Vpp} & \textbf{Frequency} & \textbf{Offset}\\ \hline
+      \textbf{Sine} & 0-3.3V & 0-350Hz & 1.65V\\ \hline
+      \textbf{Triangular} & 0-3.3V & 0-350Hz & 1.65V\\ \hline
+      \textbf{Sawtooth} & 0-3.3V & 0-350Hz & 1.65V\\ \hline
+      \textbf{Square} & 0-3.3V & 0-350Hz & 1.65V\\ \hline
+    \end{tabular}
+  \end{center}
+  \begin{center}
+  \textup{\footnotesize Table 3.1.2}
+  \end{center}
+\textup{For further improvement, using hardware circuit (Operation Amplifier) to adjust the offset value. Then it can be applicable for testing or calibrating signal to animals.}
+\newpage
+\section{\large Circuit Schematic}
+\begin{center}
+\includegraphics[width=0.9\textwidth]{2.jpg}\\
+\textup{\footnotesize Fig 3.2.1\\}
+\end{center}
+\textbf{Hardware Required:}
+    \begin{itemize}
+        \item One Arduino Due Board
+        \item 10 kilo-ohm potentiometer
+        \item 2 push buttons
+        \item 2 10 kilo-ohm resistors
+        \item Jumper Wiresp
+    \end{itemize}
+\textbf{P1:} This potentiometer controls the amplitude of the waveforms.\\
+\textbf{P2:} This potentiometer controls the frequency of the waveforms.\\
+\textbf{B1:} This button is the switch to change the waveform mode of DAC0\\
+\textbf{B2:} This button is the switch to change the waveform mode of DAC1\\
+\begin{flushleft}
+\textbf{Notice:}Users can change the \textbf{maximum frequency} by setting the value of \textbf{ADC\_MR}\\Higher maximum frequency provides larger range but worse resolution. \\
+Lower  maximum frequency provides smaller range but better resolution. So it is a trade off.
+\end{flushleft}
+\section{\large Setting Procedure}
+%\begin{flushleft}
+% \begin{enumerate}
+%  \item Connect the circuit.
+%  \item Open Arduino IDE, upload the program ``FunctionGenerator.ino''.
+%  \item Connect the wire to oscilloscope, detect the waveform.
+%  \item Press the button to transfer the waveforms and adjust the potentiometer to change the amplitude and frequency of signals to a suitable level.
+% \end{enumerate}
+%\end{flushleft}
+\textup{1. Connect the circuit.\\
+2. Open Arduino IDE, upload the program ``FunctionGenerator.ino''.\\
+3. Connect the wire to oscilloscope, detect the waveform.\\
+4. Press the button to transfer the waveforms and adjust the potentiometer to change the amplitude and frequency of signals to a suitable level.\\}
+\vspace{5pt}
+\section{\large Trouble Shooting}
+
+\subsection{Resource Used in The System}
+\begin{center}
+    \begin{tabular}{||c|c||} \hline
+      \ & one Arduino board (3.3V, GND, A0, A2\\ & DAC0, DAC1 PWM2, PWM3)\\ \textbf{Hardware} & 2 10k potentiometers\\ & 2 push buttons\\ & 2 10 kilo-ohm resistors\\ & Wires\\ \hline
+      \ & Arduino IDE\\ \textbf{Software} & FunctionGenerator.ino\\ & Waveforms.h\\ \hline
+    \end{tabular}
+  \end{center}
+  \moveleft.5\hoffset\centerline{\footnotesize Table 3.4.1.1}
+\subsection{Common Q \& A}
+\begin{flushleft}
+\textbf{Q1: }
+\textup{How to get low frequency (Such as 10Hz~50Hz)?\\}
+\vspace{5pt}
+\textbf{Answer:}
+Adjust the register \textbf{``ADC\_MR''} to realize a lower sampling frequency, then the maximum value should decrease, the resolution in low frequency domain should increase.
+\end{flushleft}
+\chapter{\Large Reference}
+\begin{flushleft}
+\textbf{\large More Information:\\}
+\vspace{3pt}
+All of the source code can be found at:\\
+1. https://github.com/diegozeng/Filter-Design\\
+2. https://github.com/diegozeng/FunctionGenerator\\
+\end{flushleft}
+\vspace{20pt}
+\begin{flushleft}
+\textbf{\large More Reference:\\}
+\vspace{3pt}
+Official Website of Arduino:\\
+http://arduino.cc/en/\\
+\end{flushleft}
+\end{document}
