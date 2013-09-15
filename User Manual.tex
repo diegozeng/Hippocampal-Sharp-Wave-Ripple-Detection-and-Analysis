@@ -1,3 +1,4 @@
+%\documentclass[20pt]{article}
 \documentclass[12pt]{report}
 \usepackage{graphicx}
 \usepackage{titlesec}
@@ -198,7 +199,7 @@ For "BandPassFilter.h" the only flexible part is:}
 \end{center}
 \textbf{Warning:} Unlike other Arduino boards, the Arduino Due board runs at 3.3V. The maximum voltage that the I/O pins can tolerate is 3.3V. Providing higher voltages, like 5V to an I/O pin could damage the board.\\For the test signal, we need to do some modification to make it in the range 0~3.3V:\vspace{3pt}
 \textbf{For data sequence from axona(off-line):}
-Try to use map(value, min, max, 0, 4095) to make the scale fit to the requirement (12-bit ADC has the resolution 4096)\\ 
+Try to use map(value, min, max, 0, 4095) to make the scale fit to the requirement (12-bit ADC has the resolution 4096)\\
 \textbf{For the real signal(on-line):}
 \textup{It can be connect to the analog input of Board II directly. But some signal conditioning circuits should be made to transfer the voltage level of real signal to 0~3.3V as mentioned.}
 \vspace{5pt}
@@ -340,5 +341,21 @@ All of the source code can be found at:\\
 \vspace{3pt}
 Official Website of Arduino:\\
 http://arduino.cc/en/\\
+\end{flushleft}
+\vspace{20pt}
+\begin{flushleft}
+\textbf{\large Remarks:\\}
+\vspace{3pt}
+If you want to get the core source code of \textbf{functions} and \textbf{definitions} of Arduino Due, please refer to:\\
+arduino-1.5.2\textbackslash hardware\textbackslash arduino\textbackslash sam\textbackslash cores\textbackslash arduino.\\
+\textbf{For example:}\\
+\begin{center}
+\includegraphics[width=0.6\textwidth]{24.jpg}\\
+\textup{\footnotesize Fig 4.1}
+\end{center}
+\begin{flushleft}
+It shows that the default value of ``AnalogReadResolution'' and ``AnalogWriteResolution'' are 10-bit and 8-bit correspondingly.
+And user can change the resolutions by setting the parameter ``\_res'' (Maximum value should be 12-bit)
+\end{flushleft}
 \end{flushleft}
 \end{document}
