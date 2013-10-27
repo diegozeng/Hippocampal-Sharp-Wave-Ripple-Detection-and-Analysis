@@ -1,7 +1,7 @@
-Filter-Design
+Hippocampal Sharp Wave Ripple Detection and Analysis
 =============
 
-Actually it is a digital band-pass filter using window functions.
+Actually it is mainly based on a digital band-pass filter using window functions.
 
 With fixed passband(1000Hz~1500Hz) and center frequency(1250Hz).
 
